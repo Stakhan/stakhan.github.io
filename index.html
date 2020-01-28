@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>PIR</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!-- Display video full-screen -->
+		    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+		    <script>
+
+		    // This function start playing the video with id from current slide,
+		    // toggles it to the FullScreen mode and fires the CancelFullScreen()
+		    // at the end of the video.
+		    function toggleFullScreen(id) {
+			var videoElement = document.getElementById(id);
+			$("#"+id).bind('ended', function(){ document.webkitCancelFullScreen(); });
+			videoElement.play();
+			videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+		    }
+
+		    // This part is to add a listener for <Enter> key and to call toggleFullScreen()
+		    // function with the video ID that is dynamically obtained from the CURRENTLY displayed slide.
+		    document.addEventListener("keydown", function(e) {
+			if (e.keyCode == 13) {
+			    toggleFullScreen($('.present').find('video').attr('id'));
+			}
+		    }, false);
+
+		    </script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section >
+					<h3>Analyse semi-automatique de vidéos de séances d'apprentissage</h3>
+					<h4>Projet d'initiation à la recherche</h4>
+					<p>Younes Jallouf  |  Elie-Alban Lescout  |  Hugo Tardy</p>
+					<img data-src="images/logos/logo_line.jpg" />
+					<img data-src="images/logos/logo_ensg.png" />
+				</section>
+				<section>
+                                        	<h2>Plan</h2>
+						<ol class="fragment fade-up">
+						  <li>Contexte</li>
+							<li>Objectif</li>
+						  <li>Approches étudiées</li>
+						  <li>Mise en œuvre</li>
+							<li>Constitution d'un jeu de données d'entrainement</li>
+						  <li>Perspectives et conclusion</li>
+						</ol>
+					</section>
+				<!-- ###CONTEXTE###-->
+				<section>
+				<section>
+			<h1>Contexte</h1>
+				</section>
+					<section>
+                                        	<h3>Contexte</h3>
+						<ul>
+						  <li>Comprendre le développement de la pensée informatique chez l'humain</li>
+						  <li>Réalisation d'activités d'informatique débranchées</li>
+							<li>Résolution de problèmes divergents/convergents</li>
+						</ul>
+					</section>
+					<section>
+                              <h3>L'activité Créacube</h3>
+
+													<img class="stretch" data-src="images/illu_manip_cubes.jpg" />
+													<small class="caption">Apprenant·e en train de résoudre le problème</small>
+        	</section>
+					<section>
+                              <h3>Analyse de l'activité Créacube par les chercheurs du LINE</h3>
+															<ul>
+															  <li>Evolution dans la couverture de l'espace problème</li>
+															  <li>Comportement dans la résolution du problème : créativité, innovation</li>
+																<li>Pour quantifier cette évolution, il faut extraire l'information des vidéos</li>
+															</ul>
+
+        	</section>
+					<section>
+                              <h3>Interface de Codage</h3>
+															<ul>
+															  <li>figures réalisées avec les cubes</li>
+															  <li>comportement du sujet participant</li>
+																<li>ses émotions</li>
+															</ul>
+
+					</section>
+					<section>
+
+															<img class="stretch" data-src="images/interface_creacube.png" />
+															<small class="caption">Interface Creacube (Illustration du LINE)</small>
+					</section>
+					<section>
+                              <h3>Annotation des vidéos</h3>
+															<img class="stretch" data-src="images/lien_JSON_video.png" />
+															<small class="caption">Lien entre évènement dans la vidéo et fichier JSON</small>
+
+					</section>
+				</section>
+				<!-- ### OBJECTIF ###-->
+			<section>
+				<section>
+			<h1>Objectif</h1>
+				</section>
+					<section>
+                                        	<h3>Objectif</h3>
+																					<p>Pour l'instant, l'annotation est <strong>manuelle, fastidieuse et chronophage</strong>.</p>
+																					<p>Notre objectif est donc d'<strong>automatiser l'annotation</strong> pour accélérer le processus.</p>
+																					<p>Pour simplifier le problème, on restreint l'objectif à l'<strong>annotation des figures seulement</strong>.</p>
+
+					</section>
+
+
+				</section>
+				<!-- ### APPROCHES ETUDIEES ###-->
+				<section>
+					<section>
+                                                <h1>Approches étudiées</h1>
+          </section>
+					<section>
+                                                <h2>Approche descriptive</h2>
+          </section>
+					<section>
+										<div><img data-src="images/segmentation.png" /><br/>
+										<small class="caption">Segmentation</small></div>
+
+					</section>
+					<section>
+										<img class="stretch" data-src="images/egohand.png" />
+										<small class="caption">Détection de mains<br/>(Source : http://vision.soic.indiana.edu/projects/egohands/)</small>
+					</section>
+					<section>
+										<img class="stretch" data-src="images/sos.png" />
+										<small class="caption"><em>Salient object subitizing</em>, cardinalisation des objets principaux<br/>(Source : http://cs-people.bu.edu/jmzhang/sos.html)</small>
+					</section>
+					<section>
+                                                <h2>Approche directe</h2>
+          </section>
+					<section>
+                  <h3>Utilisation d'un réseau neuronal convolutif (CNN)</h3>
+          	<img class="stretch" data-src="images/CNN_architecture.jpg" />
+						<small class="caption">Source : Albelwi, S.; Mahmood, A. A Framework for Designing the Architectures of Deep Convolutional Neural Networks. Entropy 2017, 19, 242.</small>
+					</section>
+
+				</section>
+				<!-- ### MISE EN OEUVRE ###-->
+				<section>
+					<section>
+						<h1>Mise en œuvre</h1>
+					</section>
+					<section>
+	                <h3><em>Fine-tuning</em> sur un Réseau de Neurones Convolutif</h3>
+									<img class="stretch" data-src="images/CNN_diagram_presentation.png" />
+
+	        </section>
+					<section>
+                  <h3>Préparation des données d'entraînement</h3>
+									<img class="stretch" data-src="images/traitement_donnees.png" />
+
+          </section>
+					<section>
+                  <h3>Prédiction d'une vidéo</h3>
+									<img class="stretch" data-src="images/" />
+
+          </section>
+					<section>
+                  <h3>Amélioration : prise en compte de la dimension temporelle du réseau</h3>
+									<img class="stretch" data-src="images/" />
+
+          </section>
+				</section>
+				<!-- ###CONSTRUCTION D'UN JEU DE DONNEES###-->
+				<section>
+					<section>
+						<h1>Constitution d'un jeu de données d'entrainement</h1>
+					</section>
+					<section>
+                          <h2>Campagne d'acquisition</h2>
+						<img class="stretch" data-src="images/" />
+        	</section>
+
+					<section>
+                                                <h2>Etiquetage</h2>
+
+          </section>
+					<section>
+                                                <h3>Sous-titrage</h3>
+
+          </section>
+					<section>
+						<pre><code data-trim data-noescape>
+					{	...
+
+						"6": {
+							"start": "123.755",
+							"end": "125.013",
+							"label": "F07"
+							},
+						"7": {
+							"start": "128.926",
+							"end": "129.988",
+							"label": "F01"
+							},
+
+						...
+					}
+
+						</code></pre>
+						<small class="caption">Exemple de fichier JSON obtenu à partir des sous-titres</small>
+
+					</section>
+
+
+				</section>
+				<!-- ###CONCLUSION###-->
+				<section>
+                        <h1>Perspectives</h1>
+												<p>Réétudier la possibilité de la convolution 3D si
+on arrive à accélérer les calculs comme on l’a
+fait en passant du CPU au GPU</p>
+<p>Confronter le CNN et le LSTM</p>
+<p>Permettre à un opérateur humain de valider les
+résultats sur une vidéo via une interface
+ergonomique et rapide</p>
+        </section>
+				<section>
+                        <h1>Conclusion</h1>
+
+        </section>
+
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+
+				    // The "normal" size of the presentation, aspect ratio will be preserved
+				    // when the presentation is scaled to fit different resolutions. Can be
+				    // specified using percentage units.
+				    width: 960,
+				    height: 700,
+
+				controls: true,  // Display controls in the bottom right corner
+				progress: true,  // Display a presentation progress bar
+				history: true,   // Push each slide change to the browser history
+				center: true,    // Vertical centering of slides
+
+				slideNumber: true, // Display the page number of the current slide
+				//autoSlide: 5000, // Slide every duration milliseconds
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+
+			});
+		</script>
+	</body>
+</html>
