@@ -8,7 +8,7 @@
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/beige.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
@@ -90,19 +90,20 @@
 					<section>
                               <h3>Analyse de l'activité Créacube par les chercheurs du LINE</h3>
 															<ul>
-															  <li>Evolution dans la couverture de l'espace problème</li>
-															  <li>Comportement dans la résolution du problème : créativité, innovation</li>
-																<li>Pour quantifier cette évolution, il faut extraire l'information des vidéos</li>
+															  <li>Evolution de la compréhension du problème</li>
+																<li>Restriction de l'espace problème en vue de la résolution</li>
+															  <li>Comportement dans la résolution du problème : démarche innovante, créative, analyse des essais infructueux, ...</li>
+																<li>Pour suivre cette évolution, il faut extraire l'information des vidéos</li>
 															</ul>
 
         	</section>
 					<section>
                               <h3>Interface de Codage</h3>
-															<ul>
+															<!--<ul>
 															  <li>figures réalisées avec les cubes</li>
 															  <li>comportement du sujet participant</li>
 																<li>ses émotions</li>
-															</ul>
+															</ul>-->
 
 					</section>
 					<section>
@@ -190,7 +191,7 @@
 
           </section>
 					<section>
-                  <h3>Amélioration : prise en compte de la dimension temporelle dans le réseau neuronal</h3>
+                  <h2>Amélioration : prise en compte de la dimension temporelle dans le réseau neuronal</h2>
           </section>
 					<section>
                   <h3>Utilisation de mosaïques</h3>
@@ -201,11 +202,24 @@
 									<img class="stretch" data-src="images/CNN_3D.png" />
 
           </section>
+					<section>
+                  <h3>Réseau récurrent à mémoire court et long terme (LSTM)</h3>
+									<img class="stretch" data-src="images/lstm.png" />
+
+
+          </section>
+					<section>
+                  <h3>Premiers résultats</h3>
+									<img class="stretch" data-src="images/premiers_resultats.png" />
+									<small class="caption">Obtenu avec le jeu d'entraînement fourni par le LINE. Les classes ayant moins de 20 exemples ont été retirées. Entraînement sur 100 époques.</small>
+
+
+          </section>
 				</section>
 				<!-- ###CONSTRUCTION D'UN JEU DE DONNEES###-->
 				<section>
 					<section>
-						<h1>Constitution d'un jeu de données d'entrainement</h1>
+						<h1>Constitution d'un jeu de données d'entraînement</h1>
 					</section>
 					<section>
                           <h3>Campagne d'acquisition</h3>
@@ -241,19 +255,25 @@
 						<small class="caption">Exemple de fichier JSON obtenu à partir des sous-titres</small>
 
 					</section>
+					<section>
+								<img class="stretch" data-src="images/seconds_resultats.png" /><br/>
+								<small class="caption">Seconds résultats : entraînement sur 400 époques avec 9000 images issues du nouveau jeu d'entraînement.</small>
 
+          </section>
 
 				</section>
 				<!-- ###CONCLUSION###-->
 				<section>
-                        <h1>Perspectives et Conclusions</h1>
-												<p>Réétudier la possibilité de la convolution 3D sur GPU</p>
-												<p>Confronter le CNN et le LSTM</p>
-												<p>Permettre à un opérateur humain de valider les prédiction de notre classifieur via une interface ergonomique et rapide</p>
-        </section>
+                        <h2>Perspectives et Conclusions</h2>
+												<ul>
+												<li>Réétudier la possibilité de la convolution 3D sur GPU.</li>
+												<li>Confronter le CNN et le LSTM.</li>
+												<li>Développement d'un interface ergonomique pour permettre à un opérateur humain de valider rapidement les prédictions de notre classifieur.</li>
+											</ul>
+				</section>
 				<section>
-                        <h1>Remerciements</h1>
-												<p>A Thierry Viéville et Margarida Romero, pour leur accueil à Nice notamment.</p>
+                        <h2>Remerciements</h2>
+												<p>A Thierry Viéville et Margarida Romero, pour leur accueil au LINE notamment.</p>
 												<p>Aux élèves de l'ENSG pour leur participation.</p>
         </section>
 
